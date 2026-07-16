@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HireSight — Skill-to-Career Intelligence</title>
+  <meta name="description" content="HireSight uses AI to map your skills to real industry demand, salary insights, career paths, and live job opportunities." />
+  <meta property="og:title" content="HireSight — Skill-to-Career Intelligence" />
+  <meta property="og:description" content="Discover the market demand for any skill and find matching jobs instantly with AI-powered analysis." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  
+  <div class="bg-canvas" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <canvas id="particle-canvas"></canvas>
+  </div>
+
+  
+  <nav class="navbar" role="navigation" aria-label="Main navigation">
+    <div class="nav-inner">
+      <a href="#" class="nav-logo" aria-label="HireSight home">
+        <div class="logo-icon" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+            <circle cx="14" cy="14" r="13" stroke="url(#lg1)" stroke-width="2"/>
+            <path d="M8 14 L12 10 L16 14 L20 8" stroke="url(#lg2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="8" cy="14" r="2" fill="url(#lg1)"/>
+            <circle cx="20" cy="8" r="2" fill="url(#lg2)"/>
+            <defs>
+              <linearGradient id="lg1" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#7c3aed"/>
+                <stop offset="1" stop-color="#06b6d4"/>
+              </linearGradient>
+              <linearGradient id="lg2" x1="0" y1="0" x2="28" y2="28" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#06b6d4"/>
+                <stop offset="1" stop-color="#7c3aed"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="logo-text">Hire<span class="logo-accent">Sight</span></span>
+      </a>
+      <div class="nav-links">
+        <a href="#search-section" class="nav-link">Search</a>
+        <a href="#how-it-works" class="nav-link">How It Works</a>
+        <a href="https://github.com" target="_blank" rel="noopener" class="nav-btn" id="github-nav-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  
+  <header class="hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-badge" id="hero-badge">
+        <span class="badge-dot"></span>
+        AI-Powered Career Intelligence
+      </div>
+      <h1 class="hero-title">
+        Map Your Skills to<br/>
+        <span class="gradient-text" id="typed-text"></span>
+        <span class="cursor-blink" aria-hidden="true">|</span>
+      </h1>
+      <p class="hero-subtitle">
+        Discover real market demand, salary benchmarks, career paths,
+        and live job opportunities — all powered by AI agents.
+      </p>
+
+      
+      <form class="search-form" id="search-form" novalidate aria-label="Skill search form">
+        <div class="search-fields">
+          <div class="input-group" id="skill-group">
+            <label class="input-label" for="skill-input">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
+              Skill
+            </label>
+            <input
+              type="text"
+              id="skill-input"
+              name="skill"
+              class="search-input"
+              placeholder="e.g. Generative AI, Python, React..."
+              autocomplete="off"
+              required
+              maxlength="100"
+              aria-required="true"
+              aria-describedby="skill-error"
+            />
+            <div class="input-error" id="skill-error" role="alert" aria-live="polite"></div>
+            <div class="suggestions-dropdown" id="skill-suggestions" role="listbox" aria-label="Skill suggestions"></div>
+          </div>
+
+          <div class="input-divider" aria-hidden="true"></div>
+
+          <div class="input-group" id="location-group">
+            <label class="input-label" for="location-input">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Location
+            </label>
+            <input
+              type="text"
+              id="location-input"
+              name="location"
+              class="search-input"
+              placeholder="e.g. Bangalore, Mumbai, Delhi..."
+              autocomplete="off"
+              value="India"
+              aria-describedby="location-error"
+            />
+            <div class="input-error" id="location-error" role="alert" aria-live="polite"></div>
+          </div>
+        </div>
+
+        <button type="submit" class="search-btn" id="search-btn" aria-label="Search for skill opportunities">
+          <span class="btn-text">Explore Career</span>
+          <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <div class="btn-loader" aria-hidden="true">
+            <div class="spinner"></div>
+          </div>
+        </button>
+      </form>
+
+      
+      <div class="popular-skills" id="popular-skills">
+        <span class="popular-label">Popular:</span>
+        <button class="pill" data-skill="Generative AI" aria-label="Search Generative AI">Generative AI</button>
+        <button class="pill" data-skill="Python" aria-label="Search Python">Python</button>
+        <button class="pill" data-skill="Machine Learning" aria-label="Search Machine Learning">Machine Learning</button>
+        <button class="pill" data-skill="React" aria-label="Search React">React</button>
+        <button class="pill" data-skill="DevOps" aria-label="Search DevOps">DevOps</button>
+        <button class="pill" data-skill="Data Science" aria-label="Search Data Science">Data Science</button>
+      </div>
+    </div>
+
+    
+    <div class="scroll-hint" aria-hidden="true">
+      <div class="scroll-mouse"><div class="scroll-dot"></div></div>
+    </div>
+  </header>
+
+  
+  <section class="how-section" id="how-it-works" aria-labelledby="how-heading">
+    <div class="container">
+      <h2 class="section-title" id="how-heading">How HireSight Works</h2>
+      <p class="section-subtitle">Three AI agents working together to give you actionable career intelligence.</p>
+      <div class="steps-grid">
+        <div class="step-card" style="--delay: 0ms">
+          <div class="step-num">01</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          </div>
+          <h3 class="step-title">Industry Research</h3>
+          <p class="step-desc">Our AI searches the web for real-time demand trends, salary benchmarks, and growth forecasts for your skill.</p>
+        </div>
+        <div class="step-card" style="--delay: 100ms">
+          <div class="step-num">02</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+          </div>
+          <h3 class="step-title">Live Job Scan</h3>
+          <p class="step-desc">We scan thousands of live job postings from top companies across India to find real opportunities matching your skill.</p>
+        </div>
+        <div class="step-card" style="--delay: 200ms">
+          <div class="step-num">03</div>
+          <div class="step-icon">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="step-title">Career Synthesis</h3>
+          <p class="step-desc">Gemini synthesises everything into a personalised career roadmap — paths, recommended skills, and next steps.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="results-section" id="search-section" aria-live="polite" aria-label="Search results">
+
+    
+    <div class="loading-state" id="loading-state" hidden aria-label="Loading results">
+      <div class="container">
+        <div class="loading-inner">
+          <div class="ai-loader" aria-hidden="true">
+            <div class="ai-ring ai-ring-1"></div>
+            <div class="ai-ring ai-ring-2"></div>
+            <div class="ai-ring ai-ring-3"></div>
+            <div class="ai-core">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+          </div>
+          <h3 class="loading-title">Researching <span id="loading-skill-name" class="gradient-text"></span></h3>
+          <div class="loading-steps">
+            <div class="loading-step" id="ls-1">
+              <div class="ls-dot"></div>
+              <span>Scanning industry demand & salary data...</span>
+            </div>
+            <div class="loading-step" id="ls-2">
+              <div class="ls-dot"></div>
+              <span>Finding live job listings...</span>
+            </div>
+            <div class="loading-step" id="ls-3">
+              <div class="ls-dot"></div>
+              <span>Synthesising career insights...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="error-state" id="error-state" hidden role="alert">
+      <div class="container">
+        <div class="error-card">
+          <div class="error-icon" aria-hidden="true">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+          </div>
+          <h3 class="error-title">Something went wrong</h3>
+          <p class="error-message" id="error-message"></p>
+          <button class="retry-btn" id="retry-btn" aria-label="Retry search">Try Again</button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="results-content" id="results-content" hidden>
+      <div class="container">
+
+        
+        <div class="results-header">
+          <div class="results-meta">
+            <h2 class="results-title">
+              Career Intelligence for <span class="gradient-text" id="result-skill-display"></span>
+            </h2>
+            <p class="results-location" id="result-location-display"></p>
+          </div>
+          <button class="new-search-btn" id="new-search-btn" aria-label="Start a new search">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            New Search
+          </button>
+        </div>
+
+        
+        <div class="stats-row" id="stats-row" aria-label="Skill statistics">
+          <div class="stat-card" id="stat-demand">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+            </div>
+            <div class="stat-body">
+              <div class="stat-label">Demand Level</div>
+              <div class="stat-value" id="stat-demand-val">—</div>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-salary">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="stat-body">
+              <div class="stat-label">Salary Range</div>
+              <div class="stat-value" id="stat-salary-val">—</div>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-growth">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+            </div>
+            <div class="stat-body">
+              <div class="stat-label">Growth Rate</div>
+              <div class="stat-value" id="stat-growth-val">—</div>
+            </div>
+          </div>
+          <div class="stat-card" id="stat-jobs">
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            </div>
+            <div class="stat-body">
+              <div class="stat-label">Jobs Found</div>
+              <div class="stat-value" id="stat-jobs-val">—</div>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="main-grid">
+
+          
+          <div class="left-col">
+
+            
+            <div class="result-card" id="card-overview">
+              <div class="card-header">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                </div>
+                <h3 class="card-title">Demand Overview</h3>
+              </div>
+              <p class="overview-text" id="overview-text"></p>
+              <div class="insights-list" id="insights-list" aria-label="Key insights"></div>
+            </div>
+
+            
+            <div class="result-card" id="card-industries">
+              <div class="card-header">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+                </div>
+                <h3 class="card-title">Top Industries & Companies</h3>
+              </div>
+              <div class="two-col-tags">
+                <div>
+                  <p class="tag-group-label">Industries</p>
+                  <div class="tags-container" id="industries-tags"></div>
+                </div>
+                <div>
+                  <p class="tag-group-label">Top Hirers</p>
+                  <div class="tags-container" id="companies-tags"></div>
+                </div>
+              </div>
+            </div>
+
+            
+            <div class="result-card" id="card-paths">
+              <div class="card-header">
+                <div class="card-icon" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                </div>
+                <h3 class="card-title">Career Roadmap</h3>
+              </div>
+              <div class="roadmap-container" id="roadmap-container" aria-label="Career paths"></div>
+              <div class="recommended-skills" id="rec-skills-section" hidden>
+                <p class="tag-group-label" style="margin-top:1.25rem">Pair These Skills</p>
+                <div class="tags-container" id="rec-skills-tags"></div>
+              </div>
+            </div>
+
+          </div>
+
+          
+          <div class="right-col">
+            <div class="jobs-panel" id="jobs-panel">
+              <div class="jobs-header">
+                <div class="card-header" style="margin-bottom:0">
+                  <div class="card-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+                  </div>
+                  <h3 class="card-title">Live Job Listings</h3>
+                </div>
+                <span class="jobs-count-badge" id="jobs-count-badge">0 jobs</span>
+              </div>
+              <div class="jobs-list" id="jobs-list" role="list" aria-label="Job listings"></div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  
+  <section class="chat-section" id="chat-section" hidden aria-label="Follow-up conversation">
+    <div class="container">
+      <div class="chat-panel" id="chat-panel">
+        <div class="chat-header">
+          <div class="card-header" style="margin-bottom:0">
+            <div class="card-icon chat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 class="card-title">Ask a Follow-up Question</h3>
+          </div>
+          <div class="chat-memory-badge">
+            <span class="badge-dot"></span>
+            Memory Active
+          </div>
+        </div>
+        <p class="chat-hint">The AI remembers your entire search. Ask anything about the results.</p>
+        <div class="chat-examples" id="chat-examples">
+          <button class="chat-example-pill" data-msg="Tell me more about the top job listed">Tell me more about the top job</button>
+          <button class="chat-example-pill" data-msg="What salary should I negotiate for?">What salary should I negotiate?</button>
+          <button class="chat-example-pill" data-msg="Give me a 3-month learning roadmap for this skill">3-month learning roadmap</button>
+          <button class="chat-example-pill" data-msg="Which company should I apply to first and why?">Which company first?</button>
+        </div>
+        <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-label="Chat messages"></div>
+        <form class="chat-form" id="chat-form" novalidate aria-label="Chat input form">
+          <div class="chat-input-wrap">
+            <input
+              type="text"
+              id="chat-input"
+              class="chat-input"
+              placeholder="Ask anything about the results..."
+              maxlength="500"
+              autocomplete="off"
+              aria-label="Follow-up message"
+            />
+            <button type="submit" class="chat-send-btn" id="chat-send-btn" aria-label="Send message">
+              <svg class="send-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              <div class="send-spinner" aria-hidden="true"><div class="spinner"></div></div>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-text">Hire<span class="logo-accent">Sight</span></span>
+        <p class="footer-tagline">AI-powered career intelligence for the next generation.</p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com" target="_blank" rel="noopener" class="footer-link">GitHub</a>
+        <a href="https://groq.com" target="_blank" rel="noopener" class="footer-link">Powered by Groq + Llama</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
