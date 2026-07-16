@@ -1,6 +1,6 @@
 # 🗺️ HireSight — Skill-to-Career Intelligence
 
-> **AI-powered career intelligence platform** that maps any skill to real industry demand, salary benchmarks, career paths, and live job opportunities — powered by Gemini, Tavily, and JSearch.
+> **AI-powered career intelligence platform** that maps any skill to real industry demand, salary benchmarks, career paths, and live job opportunities — powered by Groq, Tavily, and JSearch.
 
 ---
 
@@ -21,7 +21,7 @@
 ```
 HireSight/
 ├── app.py                   # Flask REST API server
-├── agent.py                 # LangChain agent (Gemini + Tavily + JSearch)
+├── agent.py                 # LangChain agent (Groq + Tavily + JSearch)
 ├── requirements.txt         # Python dependencies
 ├── .env.example             # Environment variable template
 ├── .gitignore               # Git ignore rules
@@ -37,7 +37,7 @@ HireSight/
 Browser → Flask (app.py) → LangChain Agent (agent.py)
                                 ├── Tavily Search (skill demand)
                                 └── JSearch API (job listings)
-                         ← Gemini 2.5 Flash synthesises → JSON response
+                         ← Groq (Llama 3) synthesises → JSON response
 ```
 
 ---
@@ -72,7 +72,7 @@ Open `.env` and fill in your API keys:
 
 | Variable | Description | Get it at |
 |----------|-------------|-----------|
-| `GOOGLE_API_KEY` | Gemini 2.5 Flash | [aistudio.google.com](https://aistudio.google.com/apikey) |
+| `GROQ_API_KEY` | Groq (Llama 3) | [console.groq.com](https://console.groq.com/keys) |
 | `TAVILY_API_KEY` | Tavily Search | [app.tavily.com](https://app.tavily.com) |
 | `RAPIDAPI_KEY` | JSearch API | [rapidapi.com/jsearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch) |
 
@@ -159,7 +159,7 @@ PORT=5000
 
 | Layer | Technology |
 |-------|-----------|
-| **LLM** | Google Gemini 2.5 Flash |
+| **LLM** | Groq (llama-3.3-70b-versatile) |
 | **Agent Framework** | LangChain |
 | **Search** | Tavily Search API |
 | **Jobs** | JSearch API (RapidAPI) |
@@ -196,4 +196,4 @@ MIT License — feel free to use, modify, and distribute.
 
 ---
 
-<p align="center">Built with ❤️ using Gemini AI + LangChain</p>
+<p align="center">Built with ❤️ using Groq + LangChain</p>
